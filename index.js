@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const connection = require('./database/database.js')
+const connection = require('./database/database.js');
+const categoriesController = require('./categories/CategoriesController');
 
 // View Engine
 app.set('view engine', 'ejs');
@@ -17,7 +18,9 @@ connection
   .catch(() => {
     console.log('Ocorreu um erro.')
   })
-  
+
+app.use('/', categoriesController);
+
 app.get('/', (req, res) => {
   res.render('index');
 });
