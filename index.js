@@ -17,8 +17,7 @@ connection
   .catch(() => {
     console.log('Ocorreu um erro.')
   })
-
-
+  
 app.get('/', (req, res) => {
   res.render('index');
 });
