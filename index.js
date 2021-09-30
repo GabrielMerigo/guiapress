@@ -4,6 +4,9 @@ const connection = require('./database/database.js');
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
 
+const Article = require('./articles/Article');
+const Category = require('./categories/Category');
+
 // View Engine
 app.set('view engine', 'ejs');
 // Body Parser
