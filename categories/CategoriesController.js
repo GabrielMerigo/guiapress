@@ -22,6 +22,15 @@ router.post('/categories/save', (req, res) => {
     res.redirect('/admin/categories/new');
   }
 
+});
+
+router.get('/admin/categories', (req, res) => {
+
+  Category.findAll().then(categories => {
+    res.render('admin/categories/index', {
+      categories: categories
+    });
+  })
 
 });
 

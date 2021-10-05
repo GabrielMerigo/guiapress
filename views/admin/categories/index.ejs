@@ -1,0 +1,28 @@
+<%- include('../../partials/header.ejs') %>
+  <%- include('../../partials/navbar.ejs') %>
+    <div class="container">
+      <hr>
+      <h2>Categorias</h2>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID:</th>
+            <th>Título</th>
+            <th>Slug</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categories.forEach(({ id, title, slug}) => { %>
+            <tr>
+              <th><%=id%></th>
+              <th><%=title%></th>
+              <th><%=slug%></th>
+            </tr>
+          <% }) %>
+        </tbody>
+
+      </table>
+    </div>
+    <%- include('../../partials/footer.ejs') %>
