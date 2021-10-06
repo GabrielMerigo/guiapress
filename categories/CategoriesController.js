@@ -56,10 +56,14 @@ router.get('/admin/categories/:id', (req, res) => {
   const id = req.params.id;
   Category.findByPk(id).then(category => {
     if(category){
-      
+      res.render('admin/categories/edit', {
+        category: category
+      });
     }else{
       res.redirect('/admin/categories');
     }
+  }).catch((err) => {
+    res.redirect('/admin/categories');
   })
 });
 
