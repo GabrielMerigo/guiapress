@@ -6,11 +6,15 @@
         <h2>Edição de Categoria</h2>
       </div>
       <div class="card-body">
-        <form method="POST" action="/categories/save">
+        <form method="POST" action="/categories/update">
           <input value="<%= category.title %>" class="form-control" placeholder="Edite o título de sua categoria" type="text" name="title" /> <br>
+          <input value="<%= category.id %>" type="hidden" name="id" /> <br>
           <button class="btn btn-success">Atualizar</button>
         </form>
       </div>
     </div>
   </div>
+
+
+  
 <%- include('../../partials/footer.ejs') %>

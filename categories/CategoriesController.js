@@ -31,7 +31,7 @@ router.get('/admin/categories', (req, res) => {
   })
 });
 
-router.post('/categories/delete', (req, res) => {
+router.post('/categories/delete', (req, res) => { // Rota para deletar determinada categoria
   const id = req.body.id;
 
   if (id) {
@@ -51,7 +51,7 @@ router.post('/categories/delete', (req, res) => {
   }
 });
 
-router.get('/admin/categories/edit/:id', (req, res) => {
+router.get('/admin/categories/edit/:id', (req, res) => { // Serve pra jogar a gente na página de edição
   const id = req.params.id;
 
   if (isNaN(id)) {
@@ -67,6 +67,22 @@ router.get('/admin/categories/edit/:id', (req, res) => {
       res.redirect('/admin/categories');
     }
   }).catch(() => {
+    res.redirect('/admin/categories');
+  });
+
+});
+
+router.post('/categories/update', (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+
+  Category.update({
+    title: title
+  }, {
+    where: {
+      id: id
+    }
+  }).then(() => {
     res.redirect('/admin/categories');
   });
 
