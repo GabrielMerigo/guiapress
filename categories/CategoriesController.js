@@ -75,9 +75,10 @@ router.get('/admin/categories/edit/:id', (req, res) => { // Serve pra jogar a ge
 router.post('/categories/update', (req, res) => {
   const id = req.body.id;
   const title = req.body.title;
-
+  
   Category.update({
-    title: title
+    title: title,
+    slug: slugify(title)
   }, {
     where: {
       id: id
