@@ -50,6 +50,17 @@ router.post('/categories/delete', (req, res) => {
   } else { // ID com valor falsy
     res.redirect('/admin/categories');
   }
-})
+});
+
+router.get('/admin/categories/:id', (req, res) => {
+  const id = req.params.id;
+  Category.findByPk(id).then(category => {
+    if(category){
+      
+    }else{
+      res.redirect('/admin/categories');
+    }
+  })
+});
 
 module.exports = router;
