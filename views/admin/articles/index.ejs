@@ -4,8 +4,8 @@
       <hr>
       <h2>Artigos</h2>
       <a class="btn btn-success" href="/admin/articles/new">Criar novo Artigo</a>
-      <hr>
-      <table class="table table-bordered">
+
+      <table class="table table-bordered mt-3">
         <thead>
           <tr>
             <th>ID</th>
@@ -22,7 +22,12 @@
               <td><%= title %></td>
               <td><%= slug %></td>
               <td><%= category.title %></td>
-              <td>Ações</td>
+              <td>
+                <form method="POST" action="/articles/delete" style="display:inline;" onsubmit="confirmDelete(event, this)">
+                  <input type="hidden" name="id" value="<%= id %>">
+                  <button class="btn btn-danger">Deletar</button>
+                </form>
+              </td>
             </tr>
           <% }) %>
         </tbody>
@@ -33,7 +38,7 @@
       <script>
         function confirmDelete(e, form) {
           e.preventDefault();
-          const decision = confirm('Você quer deletar está categoria?');
+          const decision = confirm('Você quer deletar este artigo?');
           if (decision) {
             form.submit();
           }
