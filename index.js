@@ -30,8 +30,21 @@ app.get('/', (req, res) => {
   Article.findAll().then(articles => {
     res.render('index', { articles: articles})
   });
+});
 
-  res.render('index');
+app.get('/:slug', (req, res) => {
+  const slug = req.params.slug;
+  Article.findOne({
+    where: {
+      slug: slug
+    }
+  }).then(article => {
+    if(article){
+      res.render();
+    }else{
+      res.redirect('/');
+    }
+  })
 });
 
 app.listen(8080, () => {
