@@ -27,6 +27,10 @@ app.use('/', categoriesController);
 app.use('/', articlesController);
 
 app.get('/', (req, res) => {
+  Article.findAll().then(articles => {
+    res.render('index', { articles: articles})
+  });
+
   res.render('index');
 });
 

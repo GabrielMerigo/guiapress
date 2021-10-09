@@ -36,11 +36,11 @@ router.post('/articles/save', (req, res) => {
   });
 })
 
-router.post('/articles/delete', (req, res) => { // Rota para deletar determinada categoria
+router.post('/articles/delete', (req, res) => {
   const id = req.body.id;
 
   if (id) {
-    if (!isNaN(id)) { // ID não é um número
+    if (!isNaN(id)) {
       Article.destroy({
         where: {
           id: id
