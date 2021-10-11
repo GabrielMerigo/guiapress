@@ -32,7 +32,9 @@ app.get('/', (req, res) => {
       ['id', 'DESC']
     ]
   }).then(articles => {
-    res.render('index', { articles: articles})
+    Category.findAll().then(categories => {
+      res.render('index', { articles, categories})
+    });
   });
 });
 
@@ -44,8 +46,9 @@ app.get('/:slug', (req, res) => {
     }
   }).then(article => {
     if(article){
-      console.log(article)
-      res.render('article', {article: article});
+      Category.findAll().then(categories => {
+        res.render('article', {article: article, categories});
+      })
     }else{
       res.redirect('/');
     }
@@ -53,6 +56,18 @@ app.get('/:slug', (req, res) => {
     res.redirect('/');
   })
 });
+
+app.get('/category/:slug', (req, res) => {
+  const slug = req.params.slug;
+
+  Category.findOne({
+    where: {
+      slug: slug
+    }
+  }).then(category => {
+    res.render('category', { category: category });
+  })
+})
 
 app.listen(8080, () => {
   console.log('Aplicação Rodando! 🚀')
