@@ -8,7 +8,6 @@ router.get('/admin/articles', (req, res) => {
   Article.findAll({
     include: [{ model: Category }]
   }).then(articles => {
-    console.log(articles)
     res.render('admin/articles/index', {
       articles: articles
     });
@@ -57,34 +56,34 @@ router.post('/articles/delete', (req, res) => {
 });
 
 
-router.get('/admin/categories/edit/c/:id', (req, res) => { // Serve pra jogar a gente na página de edição
+router.get('/admin/articles/edit/:id', (req, res) => {
   const id = req.params.id;
 
-  if (isNaN(id)) {
-    res.redirect('/admin/categories');
-  }
-
-  Category.findByPk(id).then(category => {
-    if (category) {
-      res.render('admin/categories/edit', {
-        category: category
-      });
-    } else {
-      res.redirect('/admin/categories');
-    }
-  }).catch(() => {
-    res.redirect('/admin/categories');
-  });
-});
+  Article.findByPk(id)
+    .then(article => {
+      res.render('admin/articles/edit', {
+        article
+      })
+    })
+    .catch(() => {
+      res.redirect('/admin/articles');
+    })
+})
 
 router.post('/articles/update', (req, res) => {
-  const body = req.body.bodyTextarea;
+  const body = req.body.body;
   const title = req.body.title;
+  const id = req.body.id;
+  console.log(body, title, id)
   
   Article.update({
     body, 
     title,
-    slug: slugify(title)
+    slug: slugify(title, {
+      lower: true
+    })
+  }, {
+    where: { id: id }
   }).then(() => {
     res.redirect('/admin/articles');
   }).catch(() => {

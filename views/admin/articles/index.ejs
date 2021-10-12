@@ -29,10 +29,7 @@
                 <button class="btn btn-danger">Deletar</button>
               </form>
               
-              <form method="POST" action="/admin/categories/edit/c/<%= id %>" style="display:inline;">
-                <input type="hidden" name="id" value="<%= id %>">
-                <button class="btn btn-warning">Editar</button>
-              </form>
+              <a class="btn btn-warning" href="/admin/articles/edit/<%= id %>">Editar</a>
 
               </td>
             </tr>
