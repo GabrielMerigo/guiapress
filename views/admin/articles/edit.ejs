@@ -10,7 +10,18 @@
           <form method="POST" action="/articles/update">
             <input name="title"  value="<%= article.title %>" type="text" placeholder="Define o titulo do artigo"  class="form-control"  /> <br>
             <input name="body" value="<%= article.body %>"  placeholder="Defina o texto do seu artigo" class="form-control" id="bodyTextarea"  ></input> <br>
-            <input name="id" value="<%= article.id %>" type="hidden" ></input> <br>
+            <input name="id" value="<%= article.id %>" type="hidden"></input> <br>
+            <label>Categoria que esse artigo vai pertencer</label> <br>
+            <select name="category" class="form-control">
+              <% categories.forEach(category => { %>
+                  <% if(category.id === article.categoryId) { %>
+                    <option selected value="<%= category.id %>"><%= category.title %></option>
+                  <% } else { %>
+                    <option value="<%= category.id %>"><%= category.title %></option>
+                  <% }  %>
+              <% }) %>
+            </select>
+
             <br>
             <button class="btn btn-success">Atualizar</button>
           </form>

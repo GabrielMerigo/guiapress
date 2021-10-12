@@ -16,7 +16,7 @@ router.get('/admin/articles', (req, res) => {
 
 router.get('/admin/articles/new', (req, res) => {
   Category.findAll().then(articles => {
-    res.render('admin/articles/new', {articles})
+    res.render('admin/articles/new', { articles })
   })
 })
 
@@ -27,7 +27,7 @@ router.post('/articles/save', (req, res) => {
 
   Article.create({
     title,
-    slug: slugify(title, {lower: true}),
+    slug: slugify(title, { lower: true }),
     body,
     categoryId
   }).then(() => {
@@ -61,8 +61,12 @@ router.get('/admin/articles/edit/:id', (req, res) => {
 
   Article.findByPk(id)
     .then(article => {
-      res.render('admin/articles/edit', {
-        article
+      console.log(article.categoryId)
+      Category.findAll().then(categories => {
+        res.render('admin/articles/edit', {
+          article,
+          categories
+        })
       })
     })
     .catch(() => {
@@ -74,14 +78,15 @@ router.post('/articles/update', (req, res) => {
   const body = req.body.body;
   const title = req.body.title;
   const id = req.body.id;
-  console.log(body, title, id)
-  
+  const category = req.body.category;
+
   Article.update({
-    body, 
+    body,
     title,
     slug: slugify(title, {
       lower: true
-    })
+    }),
+    categoryId: category
   }, {
     where: { id: id }
   }).then(() => {
