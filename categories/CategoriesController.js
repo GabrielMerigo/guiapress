@@ -69,7 +69,6 @@ router.get('/admin/categories/edit/:id', (req, res) => { // Serve pra jogar a ge
   }).catch(() => {
     res.redirect('/admin/categories');
   });
-
 });
 
 router.post('/categories/update', (req, res) => {

@@ -1,0 +1,33 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h2>Edição de Artigo</h2>
+      </div>
+      <div class="card-body">
+          <form method="POST" action="/articles/update">
+            <input value="<%= article.title %>" class="form-control" type="text" name="title" placeholder="Define o titulo do artigo" /> <br>
+            <input value="<%= article.body %>" name="body" placeholder="Defina o texto do seu artigo" id="bodyTextarea" class="form-control" ></input> <br>
+            <br>
+            <button class="btn btn-success">Editar</button>
+          </form>
+      </div>
+    </div>
+  </div>
+
+  
+<%- include('../../partials/footer.ejs') %>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+
+  tinymce.init({
+    language: 'pt_BR',
+    selector: "#bodyTextarea",
+    plugins: [
+      'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+    ]
+  })
+
+</script>

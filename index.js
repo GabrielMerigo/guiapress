@@ -76,7 +76,6 @@ app.get('/category/:slug', (req, res) => {
   }).catch(() => {
     res.redirect('/')
   })
-
 })
 
 app.listen(8080, () => {

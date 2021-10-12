@@ -23,10 +23,17 @@
               <td><%= slug %></td>
               <td><%= category.title %></td>
               <td>
-                <form method="POST" action="/articles/delete" style="display:inline;" onsubmit="confirmDelete(event, this)">
-                  <input type="hidden" name="id" value="<%= id %>">
-                  <button class="btn btn-danger">Deletar</button>
-                </form>
+                
+              <form method="POST" action="/articles/delete" style="display:inline;" onsubmit="confirmDelete(event, this)">
+                <input type="hidden" name="id" value="<%= id %>">
+                <button class="btn btn-danger">Deletar</button>
+              </form>
+              
+              <form method="POST" action="/admin/categories/edit/c/<%= id %>" style="display:inline;">
+                <input type="hidden" name="id" value="<%= id %>">
+                <button class="btn btn-warning">Editar</button>
+              </form>
+
               </td>
             </tr>
           <% }) %>
