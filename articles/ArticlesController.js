@@ -94,6 +94,18 @@ router.post('/articles/update', (req, res) => {
   }).catch(() => {
     res.redirect('/admin/articles');
   })
+});
+
+router.get('/articles/page/:num', (req, res) => {
+  const page = req.params.num;
+
+  Article.findAndCountAll({
+    limit: 4,
+    offset: 4,
+  }).then(articles => {
+    res.json(articles);
+  })
+
 })
 
 module.exports = router;
