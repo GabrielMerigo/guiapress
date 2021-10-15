@@ -108,7 +108,10 @@ router.get('/articles/page/:num', (req, res) => {
 
   Article.findAndCountAll({
     limit: 4,
-    offset
+    offset,
+    order: [
+      ['id', 'DESC']
+    ]
   }).then(articles => {
     let next;
 
@@ -119,11 +122,11 @@ router.get('/articles/page/:num', (req, res) => {
     }
 
     const results = {
+      page: parseInt(page),
       next,
       articles
     }
 
-    console.log();
     Category.findAll().then(categories => {
       res.render('admin/articles/page', { results, categories })
     })

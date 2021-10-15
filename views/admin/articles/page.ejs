@@ -15,6 +15,22 @@
       </div>
       <br>
     <% }) %>
+
+    <div class="row">
+      
+      <div class="col col-12">
+        <% if(results.page !== 0){ %>
+          <a style="float:left;" href="/articles/page/<%= results.page - 1 %>">Página Anterior</a>
+        <% }  %>
+
+        <% if(results.next){ %>
+          <a style="float:right;" href="/articles/page/<%= results.page + 1 %>">Próxima Página</a>
+        <% } %>
+      </div>
+
+    </div>
+    <br>
+
   </div>
 </body>
 
