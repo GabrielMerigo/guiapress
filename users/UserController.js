@@ -14,18 +14,29 @@ router.get('/admin/users/create', (req, res) => {
 router.post('/users/create', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  
 
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
+  User.findOne({
+    where: {
+      email: email
+    }
+  }).then(user => {
+    if (!user) {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
 
-  User.create({
-    email,
-    password: hash
-  }).then(() => {
-    res.redirect('/');
-  }).catch(() => {
-    res.redirect('/');
+      User.create({
+        email,
+        password: hash
+      }).then(() => {
+        res.redirect('/');
+      }).catch(() => {
+        res.redirect('/');
+      })
+      
+    } else {
+      console.log('Já possuiamos esse e-mail na nossa base de dados.');
+      res.render('admin/users/create');
+    }
   })
 });
 
