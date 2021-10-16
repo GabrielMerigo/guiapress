@@ -8,6 +8,7 @@ const userController = require('./users/UserController');
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
 const User = require('./users/User');
+const session = require('express-session');
 
 // View Engine
 app.set('view engine', 'ejs');
@@ -15,6 +16,15 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 // Static Files
 app.use(express.static('public'));
+
+// Sessions
+
+app.use(session({
+  secret: "qualquercoisa",
+  cookie: {
+    maxAge: 6 * 100000 * 10,
+  }
+}));
 
 connection
   .authenticate()
@@ -28,6 +38,26 @@ connection
 app.use('/', categoriesController);
 app.use('/', articlesController);
 app.use('/', userController);
+
+app.get('/session', (req, res) => {
+  req.session.treinamento = 'Formação Node JS'
+  req.session.ano = 2021
+  req.session.user = {
+    name: 'gabriel',
+    email: 'ajsdhadsj@gmail.com',
+    id: 10
+  };
+
+  res.send('Sessão gerada');
+});
+
+app.get('/reading', (req, res) => {
+  res.json({
+    treinamento: req.session.treinamento,
+    ano: req.session.ano,
+    user: req.session.user
+  });
+});
 
 app.get('/', (req, res) => {
   Article.findAll({
