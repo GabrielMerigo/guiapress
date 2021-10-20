@@ -4,14 +4,14 @@ const router = express.Router();
 const User = require('./User');
 const bcrypt = require('bcryptjs');
 
-router.get('/admin/users/create', (req, res) => {
-  res.render('admin/users/create');
-});
-
 router.get('/admin/users/', (req, res) => {
   User.findAll().then(users => {
     res.render('admin/users/index', { users })
   });
+});
+
+router.get('/admin/users/create', (req, res) => {
+  res.render('admin/users/create');
 });
 
 router.post('/users/create', (req, res) => {
@@ -43,10 +43,6 @@ router.post('/users/create', (req, res) => {
   })
 });
 
-function welcome() {
-  console.log('oi');
-}
-
 router.get('/login', (req, res) => {
   res.render('admin/users/login');
 })
@@ -61,7 +57,6 @@ router.post('/autenticate', (req, res) => {
     }
   }).then(user => {
     if(user){
-      //Validar senha
       const corret = bcrypt.compareSync(password, user.password);
       if(corret){
         req.session.user = {
