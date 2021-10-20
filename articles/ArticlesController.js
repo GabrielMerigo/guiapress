@@ -36,7 +36,7 @@ router.post('/articles/save', (req, res) => {
   });
 })
 
-router.post('/articles/delete', (req, res) => {
+router.post('/articles/delete', adminAuth, (req, res) => {
   const id = req.body.id;
 
   if (id) {
@@ -57,7 +57,7 @@ router.post('/articles/delete', (req, res) => {
 });
 
 
-router.get('/admin/articles/edit/:id', (req, res) => {
+router.get('/admin/articles/edit/:id', adminAuth, (req, res) => {
   const id = req.params.id;
 
   Article.findByPk(id)
@@ -75,7 +75,7 @@ router.get('/admin/articles/edit/:id', (req, res) => {
     })
 })
 
-router.post('/articles/update', (req, res) => {
+router.post('/articles/update', adminAuth, (req, res) => {
   const body = req.body.body;
   const title = req.body.title;
   const id = req.body.id;
